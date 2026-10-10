@@ -76,16 +76,25 @@ def run_gui() -> None:
     root.mainloop()
 
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="VkWeather")
-    parser.add_argument(
-        "--gui",
-        action="store_true",
-        help="Launch the graphical interface",
-    )
-    args = parser.parse_args()
 
-    if args.gui:
-        run_gui()
-    else:
-        raise SystemExit(main())
+def run_application() -> int:
+    """Let the user choose the application interface."""
+    while True:
+
+        print("1 - Консоль")
+        print("2 - Графический интерфейс")
+
+        choice = input("Выберите режим (1 или 2): ").strip()
+
+        if choice == "1":
+            return main()
+
+        if choice == "2":
+            run_gui()
+            return 0
+
+        print("Некорректный выбор. Введите 1 или 2.")
+
+
+if __name__ == "__main__":
+    raise SystemExit(run_application())
