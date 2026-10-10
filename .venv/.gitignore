@@ -1,29 +1,14 @@
-# Python
+# Python cache
 __pycache__/
 *.py[cod]
 
 # Virtual environment
 .venv/
-venv/
 
 # IDE
 .idea/
 
-# Environment variables and secrets
+# Environment variables
 .env
 .env.*
 !.env.example
-
-# Test and coverage
-.pytest_cache/
-.coverage
-htmlcov/
-
-# Build artifacts
-build/
-dist/
-*.egg-info/
-
-# OS
-.DS_Store
-Thumbs.db
