@@ -1,7 +1,9 @@
-
 import sys
 from pathlib import Path
-
+import argparse
+import tkinter as tk
+from ViewModel.weather_viewmodel import WeatherViewModel
+from ViewModel.weather_view import WeatherView
 from Services.city_loader import load_cities
 from Services.weather_analyzer import analyze_weather
 from Services.weather_api import WeatherApiError, get_weather
@@ -63,5 +65,27 @@ def main() -> int:
     return 0
 
 
+def run_gui() -> None:
+    project_dir = Path(__file__).resolve().parent
+    cities_file = project_dir / "Data" / "cities.txt"
+
+    root = tk.Tk()
+    view_model = WeatherViewModel(cities_file)
+    WeatherView(root, view_model)
+
+    root.mainloop()
+
+
 if __name__ == "__main__":
-    raise SystemExit(main())
+    parser = argparse.ArgumentParser(description="VkWeather")
+    parser.add_argument(
+        "--gui",
+        action="store_true",
+        help="Launch the graphical interface",
+    )
+    args = parser.parse_args()
+
+    if args.gui:
+        run_gui()
+    else:
+        raise SystemExit(main())
